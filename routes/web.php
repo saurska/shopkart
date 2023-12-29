@@ -22,6 +22,13 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'imageUrls' => [
+            asset('storage/ImageSlider/img1.webp'),
+            asset('storage/ImageSlider/img2.webp'),
+            asset('storage/ImageSlider/img3.webp'),
+            asset('storage/ImageSlider/img4.webp'),
+            // Add more image URLs as needed
+        ],
     ]);
 });
 
