@@ -12,7 +12,7 @@ use App\Http\Controllers\VendorAuth\VerifyEmailController;
 use App\Http\Controllers\Profile\AvatarController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')->group(function () {
+Route::group(['middleware' => ['guest:vendor'], 'prefix'=>'admin','as'=>'vendor.'],function(){
     Route::get('register', [RegisteredVendorController::class, 'create'])
                 ->name('register');
 
@@ -41,7 +41,8 @@ Route::middleware('guest')->group(function () {
 
 });
 
-Route::middleware('auth')->group(function () {
+    Route::group(['middleware' => ['auth:vendor'], 'prefix'=>'admin','as'=>'vendor.'],function(){
+
     Route::get('verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');
 

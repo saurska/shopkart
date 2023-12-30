@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\VendorProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -36,3 +37,19 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+//route for vendor
+Route::get('/vendor/dashboard', function () {
+    return view('vendor.dashboard');
+})->middleware(['auth', 'verified'])->name('vendor.dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [VendorProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [VendorProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [VendorProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+
+
+//require __DIR__.'/vendorauth.php';
